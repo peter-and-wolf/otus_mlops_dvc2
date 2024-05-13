@@ -1,0 +1,28 @@
+stages:
+  scaling:
+    cmd: python src/scale.py
+    deps:
+    - data/test_data.csv
+    - data/train_data.csv
+    - src/scale.py
+    outs:
+    - data/scaled_test_data.npy
+    - data/scaled_train_data.npy
+  training:
+    cmd: python src/train.py
+    deps:
+    - data/scaled_train_data.npy
+    - src/train.py
+    outs:
+    - data/model.pkl
+    metrics:
+    - metrics/train_metrics.json:
+        cache: false
+  evaluation:
+    cmd: python src/eval.py
+    deps:
+    - data/scaled_test_data.npy
+    - data/model.pkl
+    metrics:
+    - metrics/eval_metrics.json:
+        cache: false
