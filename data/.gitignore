@@ -1,2 +1,5 @@
 /test_data.csv
 /train_data.csv
+/scaled_train_data.npy
+/scaled_test_data.npy
+/model.pkl
